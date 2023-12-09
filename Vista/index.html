@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <title>Selector</title>
+</head>
+<body>
+    <head>
+        <div class="titulo">
+            <h1>Selector aleatorio</h1>
+        </div>
+    </head>
+    <div class="body-form">
+        <div class="form">
+            <div id="alert"></div>
+            <label for="file-entry">Inserte archivo aquí:</label>
+            <input type="file" id="file-entry" name="file-entry" accept=".csv">
+            <label>Nombre del archivo a crear: </label>
+            <input type="text" id="txt-new-name">
+            <label>Número de grupos a crear: </label>
+            <input type="text" id="txt-groups">
+            <label>Cantidad de alumnos por grupo: </label>
+            <input type="text" id="txt-alumnos-grupo">
+            <input type="submit" value="Subir" onclick="handleFormSubmission(event)">    
+        </div>
+    </div>
+    <script src="/JS/upload.js"></script>
+</body>
+</html> 
