@@ -14,6 +14,16 @@ ALLOWED_EXTENSIONS = 'csv'
 def allowed_file(filename):
     return filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS#'.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS, 
 
+def mostrar_contenido_csv(archivo_csv):
+    filas = []
+    with open(archivo_csv, 'r', newline='') as archivo:
+        lector_csv = csv.reader(archivo)
+
+        # Lee el contenido
+        for fila in lector_csv:
+            filas.append(fila)
+        return fila
+
 @app.route('/upload', methods=['POST'])
 def upload():
     try:
@@ -34,6 +44,7 @@ def upload():
                 grupos_creados = int(request.form['txt-groups'])
                 alumnos_por_grupo = int(request.form['txt-alumnos-grupo'])
                 alumnos_leidos = []
+                datos_tabla = []
                 with open(f"{app.config['UPLOAD_FOLDER']}/{nombre_archivo}", newline='') as csvfile:
                     reader = csv.reader(csvfile)
                     for row in reader:
@@ -49,9 +60,10 @@ def upload():
                                     row = rdm.choice(alumnos_leidos)
                                     writer.writerow(f"{row}\tGrupo: {grupo+1}")
                                     count+=1
+                                    datos_tabla.append([row,f"Grupo: {grupo+1}"])
                                     alumnos_leidos.remove(row)
                                 except Exception as ex:
-                                    return jsonify("Archivo listo")
+                                    return jsonify(datos_tabla)
             return jsonify("Archivo no permitido")
     except Exception as ex:
         return jsonify(f"Error: {ex}")

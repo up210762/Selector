@@ -7,9 +7,13 @@ const handleFormSubmission = (event) => {
     const quantityByGroup = document.getElementById('txt-alumnos-grupo')
     const alertContent = document.getElementById('alert')
     const errorMessage = document.createElement('p')
+    if (alertContent.childElementCount > 0){
+        alertContent.removeChild(document.getElementById('alert-text'))
+    }
 
     if (!fileInput.files.length) {
         alertContent.className = 'error'
+        errorMessage.id = 'alert-text'
         errorMessage.innerText = 'Por favor selecciona un archivo.'
         alertContent.appendChild(errorMessage) 
         return
@@ -17,19 +21,21 @@ const handleFormSubmission = (event) => {
 
     if (!newFile.value || !groupsToCreate.value || !quantityByGroup.value) {
         alertContent.className = 'error'
+        errorMessage.id = 'alert-text'
         errorMessage.innerText = 'Todos los campos son obligatorios.'
         alertContent.appendChild(errorMessage) 
         return
     }
 
-    const allowedExtensions = ['.csv']
-    const fileName = fileInput.files[0]
-    console.log(fileName)
-    const fileExtension = 'csv'
+    const allowedExtensions = 'csv'
+    const fileName = fileInput.files[0].name
+    const fileNameParts = fileName.split(".")
+    const extension = fileNameParts[fileNameParts.length - 1]
 
-    if (allowedExtensions.indexOf('.' + fileExtension) === -1) {
-        alertContent.className = 'alert'
-        errorMessage.innerText = `La extensión del archivo no es válida. solo se permiten archivos ${allowedExtensions[0]}`
+    if (!(extension.toLowerCase() === allowedExtensions)) {
+        alertContent.className = 'error'
+        errorMessage.id = 'alert-text'
+        errorMessage.innerText = `La extensión del archivo no es válida. solo se permiten archivos ${allowedExtensions}`
         alertContent.appendChild(errorMessage) 
         return
     }
@@ -48,11 +54,41 @@ const handleFormSubmission = (event) => {
     })
     .then(response => response.json())
     .then(data => {
-        const alertContent = document.getElementById('alert')
-        alertContent.className = "success"
-        alertContent.innerText = data
+        const tablaContainer = document.getElementById("tabla-container")
+        if (tablaContainer.childElementCount > 0){
+            tablaContainer.removeChild(document.getElementById("renderizado-csv"))
+        }
+        const tabla = document.createElement('table')
+        tabla.id = 'renderizado-csv'
+        const encabezadoTabla = document.createElement('thead')
+        const titulos = ['Nombre', 'Identificador', 'Grupo']
+        
+        titulos.forEach(element => {
+            let tituloColumna = document.createElement('th')
+            tituloColumna.innerText = element
+            encabezadoTabla.appendChild(tituloColumna)
+        });
+        tabla.appendChild(encabezadoTabla)
+        
+        data.forEach(element => {
+            let contenidos = new Array(element[0][0], element[0][1], element[1])
+            let cuerpoTabla = document.createElement('tbody')
+            contenidos.forEach(element => {
+                let contenidoTabla = document.createElement('td')
+                contenidoTabla.innerText = element
+                cuerpoTabla.appendChild(contenidoTabla)
+            });
+            tabla.appendChild(cuerpoTabla)
+        });
+        tablaContainer.appendChild(tabla)
+        alertContent.className = 'success'
+        errorMessage.id = 'alert-text'
+        errorMessage.innerText = `Archivo procesado.`
+        alertContent.appendChild(errorMessage) 
     })
     .catch(error => {
-        console.error("Error al enviar el archivo: ", error)
+        alertContent.className = 'error'
+        errorMessage.innerText = error
+        alertContent.appendChild(errorMessage)
     })
 }
