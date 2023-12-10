@@ -1,2 +1,4 @@
 # Archivos CSV
 *.csv
+#Carpeta venv
+venv/

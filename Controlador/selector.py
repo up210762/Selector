@@ -55,51 +55,5 @@ def upload():
             return jsonify("Archivo no permitido")
     except Exception as ex:
         return jsonify(f"Error: {ex}")
-
-    # if request.method == 'POST':
-
-    #     # check if the post request has the file part
-    #     if 'file' not in request.files:
-    #         flash('No file part')
-    #         return redirect(request.url)
-    #     file = request.files['file']
-
-    #     # If the user does no select a file, the browser submits an
-    #     # empty file without a filename
-    #     if file.filename == '':
-    #         flash('No selected file')
-    #         return redirect(request.url)
-
-    #     if file and allowed_file(file.filename):
-    #         filename = secure_filename(file.filename)
-    #         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    #         return redirect(url_for('download_file', name=filename))
-
-    #     nombre_archivo = file.filename
-    #     nombre_archivo_nuevo = request['txt-new-name']
-    #     grupos_creados = request['txt-groups']
-    #     alumnos_por_grupo = request['txt-alumnos-grupo']
-    #     alumnos_leidos = []
-
-    #     try:
-    #         with open(nombre_archivo, newline='') as csvfile:
-    #             reader = csv.reader(csvfile)
-    #             for row in reader:
-    #                 alumnos_leidos.append(row)
-    #         os.system(f"touch {nombre_archivo_nuevo}")
-    #         with open(nombre_archivo_nuevo, 'w', newline='') as csvnewfile:
-    #             writer = csv.writer(csvnewfile, delimiter=' ',
-    #                                 quotechar=' ', quoting=csv.QUOTE_MINIMAL)
-    #             while alumnos_leidos != "":
-    #                 for grupo in range(grupos_creados):
-    #                     count = 0
-    #                     while count < alumnos_por_grupo:
-    #                         row = rdm.choice(alumnos_leidos)
-    #                         writer.writerow(f"{row}\tGrupo: {grupo+1}")
-    #                         alumnos_leidos.remove(row)
-    #                         count+=1
-        # except Exception as ex:
-        #     print(ex) 
-
 if __name__ == '__main__':
     app.run(debug=True)
