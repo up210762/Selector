@@ -4,6 +4,18 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+body {
+    overflow-y: scroll; /* Muestra la barra de desplazamiento en navegadores no WebKit */
+}
+  
+body::-webkit-scrollbar {
+    width: 5px; 
+}
+  
+body::-webkit-scrollbar-thumb {
+    background-color: black;
+}
+
 .titulo {
     width: 100%;
     height: 60px;
@@ -17,20 +29,112 @@ h1 {
     color: white;
 }
 
+.principal-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.downloads-container {
+    width: 32rem;
+    margin-top: 2rem;
+    padding: 5px;
+}
+
+.links-zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    background-color: #ddd;
+    width: 95%;
+    height: 98%;
+    max-height: 40rem;
+    padding: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.links-zone::-webkit-scrollbar {
+    width: 5px;
+}
+
+.links-zone::-webkit-scrollbar-thumb {
+    background-color: black;
+}
+  
+
+.link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    background-color: white;
+    padding: 5px;
+    margin: 0 0 5px ;
+    box-sizing: border-box;
+}
+
+.name-file {
+    width: 80%;
+    overflow: hidden;
+}
+
+.download {
+    width:40%;
+    overflow: hidden;
+}
+
+.download button {
+    background-color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.download button:hover {
+    background-color: #ddd;
+}
+
+.download button:active {
+    background-color: black;
+    color: white;
+}
+
+.download a button {
+    display: flex;
+}
+
+.download i {
+    height: 16px;
+}
+
+.download a {
+    text-decoration: none;
+}
+
+.download p {
+    margin-right: 3px;
+}
+
 .body-form {
-    height: 50rem;
+    height: 42rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
+    padding: 0;
 }
 
 .form {
-    max-height: 600px;
-    width: 500px;
+    max-height: 40rem;
+    min-height: 40rem;
+    width: 30rem;
     display: grid;
     grid-row: span;
-    border: black solid 1px;
+    border: rgb(156, 156, 156) solid 1px;
     overflow: hidden;
     margin: 0;
     padding: 6px;
@@ -80,7 +184,6 @@ input[type=submit]:active {
 
 #alert[class=error] {
     height: 3rem;
-    border: black solid 1px;
     background-color: rgb(214, 105, 105);
     color: white;
     display: flex;
@@ -95,7 +198,6 @@ input[type=submit]:active {
 
 #alert[class=success] {
     height: 3rem;
-    border: black solid 1px;
     background-color: rgb(20, 221, 13);
     color: white;
     display: flex;
@@ -104,15 +206,38 @@ input[type=submit]:active {
     text-align: justify;
 }
 
+#tabla-container, .container-tabla-renderizado {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+    text-justify: inter-word;
+}
+
 table {
     border-collapse: collapse;
-    width: 100%;
 }
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
+
+#nombre{
+    width: 20rem;
+}
+
+#grupo {
+    width: 4rem;
+}
+
+#identificador {
+    width: 5rem;
+}
+
 th {
     background-color: #f2f2f2;
 }

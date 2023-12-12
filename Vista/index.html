@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="/Iconos/mixer.svg" type="image/x-icon">
     <title>Selector</title>
 </head>
 <body>
@@ -12,22 +14,43 @@
             <h1>Selector aleatorio</h1>
         </div>
     </head>
-    <div class="body-form">
-        <div class="form">
-            <div id="alert"></div>
-            <label for="file-entry">Inserte archivo aquí:</label>
-            <input type="file" id="file-entry" name="file-entry" accept=".csv">
-            <label>Nombre del archivo a crear: </label>
-            <input type="text" id="txt-new-name">
-            <label>Número de grupos a crear: </label>
-            <input type="text" id="txt-groups">
-            <label>Cantidad de alumnos por grupo: </label>
-            <input type="text" id="txt-alumnos-grupo">
-            <input type="submit" value="Subir" onclick="handleFormSubmission(event)">    
+    <div class="principal-container">
+        <div class="body-form">
+            <div class="form">
+                <div id="alert"></div>
+                <label for="file-entry">Inserte archivo aquí:</label>
+                <input type="file" id="file-entry" name="file-entry" accept=".csv">
+                <label>Nombre del archivo a crear: </label>
+                <input type="text" id="txt-new-name">
+                <label>Número de grupos a crear: </label>
+                <input type="text" id="txt-groups">
+                <label>Cantidad de alumnos por grupo: </label>
+                <input type="text" id="txt-alumnos-grupo">
+                <input type="submit" value="Subir" onclick="handleFormSubmission(event)">    
+            </div>
+        </div>
+        <div class="downloads-container">
+            <div class="links-zone" id="links-zone"></div>
         </div>
     </div>
-    <h2>CSV Renderizado</h2>
-    <div id="tabla-container"></div>
+                <!-- <div class="link">
+                    <div class="name-file">
+                        <p>Nombre</p>
+                    </div>
+                    <div class="download">
+                        <a href="#">
+                            <button>
+                                <p>Descargar</p>
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div> -->
+    <div class="container-tabla-renderizado">
+        <h2>CSV Renderizado</h2>
+        <div id="tabla-container"></div>
+    </div>
     <script src="/JS/upload.js"></script>
+    <script type="module" src="/JS/getFiles.js"></script>
 </body>
 </html> 

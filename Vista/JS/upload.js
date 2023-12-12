@@ -61,11 +61,12 @@ const handleFormSubmission = (event) => {
         const tabla = document.createElement('table')
         tabla.id = 'renderizado-csv'
         const encabezadoTabla = document.createElement('thead')
-        const titulos = ['Nombre', 'Identificador', 'Grupo']
+        const titulos = ['Nombre', 'Matrícula', 'Grupo']
         
         titulos.forEach(element => {
             let tituloColumna = document.createElement('th')
             tituloColumna.innerText = element
+            tituloColumna.id = element.toLowerCase()
             encabezadoTabla.appendChild(tituloColumna)
         });
         tabla.appendChild(encabezadoTabla)

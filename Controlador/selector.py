@@ -5,7 +5,11 @@ import random as rdm
 import csv, os
 
 app = Flask(__name__)
-CORS(app, resources={r"/upload":{"origins": "*"}})
+CORS(app, resources={
+    r"/upload":{"origins": "*"},
+    r"/getfiles":{"origins": "*"},
+    r"/uploads/*":{"origins": "*"}
+    })
 
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
@@ -24,7 +28,7 @@ def mostrar_contenido_csv(archivo_csv):
             filas.append(fila)
         return fila
 
-@app.route('/upload', methods=['POST'])
+@app.route('/upload', methods=['GET','POST'])
 def upload():
     try:
         if request.method == 'POST':
@@ -49,7 +53,7 @@ def upload():
                     reader = csv.reader(csvfile)
                     for row in reader:
                         alumnos_leidos.append(row)
-                with open(f"{app.config['UPLOAD_FOLDER']}/{nombre_archivo_nuevo}.csv", 'w', newline='') as csvnewfile:
+                with open(f"../Vista/uploads/{nombre_archivo_nuevo}.csv", 'w', newline='') as csvnewfile:
                     writer = csv.writer(csvnewfile, delimiter=' ',
                                         quotechar=' ', quoting=csv.QUOTE_MINIMAL)
                     while alumnos_leidos != "":
@@ -65,7 +69,36 @@ def upload():
                                 except Exception as ex:
                                     return jsonify(datos_tabla)
             return jsonify("Archivo no permitido")
+        else:
+            return jsonify('Método no permitido.')
     except Exception as ex:
         return jsonify(f"Error: {ex}")
+    
+@app.route('/getfiles', methods=['GET', 'POST'])
+def get_files():
+    try:
+        if request.method == 'GET':
+            with os.scandir('../Vista/uploads') as ficheros:
+                ficheros = [fichero.name for fichero in ficheros 
+                            if fichero.is_file() 
+                            and fichero.name.endswith('.csv')]
+                return jsonify(ficheros)
+        else:
+            return jsonify('Método no permitido.')
+    except Exception as ex:
+        return ('Error')
+
+@app.route('/uploads/<id>', methods=['GET', 'POST'])
+def download_files(id):
+    try:
+        content = []
+        with open(f"{app.config['UPLOAD_FOLDER']}/{id}", newline='') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                content.append(row)
+        return jsonify(content)
+    except Exception as ex:
+        return jsonify("Archivo no encontrado")
+
 if __name__ == '__main__':
     app.run(debug=True)
