@@ -48,7 +48,7 @@ const handleFormSubmission = (event) => {
     formData.append('txt-groups', groupsToCreate.value)
     formData.append('txt-alumnos-grupo', quantityByGroup.value)
 
-    fetch('http://localhost:5000/upload', {
+    fetch('http://192.168.100.44:5000/upload', {
         method: 'POST',
         body: formData
     })
@@ -72,7 +72,7 @@ const handleFormSubmission = (event) => {
         tabla.appendChild(encabezadoTabla)
         
         data.forEach(element => {
-            let contenidos = new Array(element[0][0], element[0][1], element[1])
+            let contenidos = new Array(element[0], element[1], element[2])
             let cuerpoTabla = document.createElement('tbody')
             contenidos.forEach(element => {
                 let contenidoTabla = document.createElement('td')
@@ -89,6 +89,7 @@ const handleFormSubmission = (event) => {
     })
     .catch(error => {
         alertContent.className = 'error'
+        errorMessage.id = 'alert-text'
         errorMessage.innerText = error
         alertContent.appendChild(errorMessage)
     })

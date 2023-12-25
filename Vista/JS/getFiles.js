@@ -2,7 +2,7 @@ import { getCSV } from "./getCSV.js";
 import { quitarExtension } from "./quitarExtension.js";
 
 document.addEventListener('DOMContentLoaded', ()=>{
-    fetch('http://localhost:5000/getfiles', {
+    fetch('http://192.168.100.44:5000/getfiles', {
         method: 'GET',
     })
     .then(response => response.json())
@@ -30,12 +30,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
             let pharagraph = document.createElement('p')
             pharagraph.innerText = element
             nameFile.appendChild(pharagraph)
+
+            let watch = document.createElement('div')
+            watch.id = element
+            let watchContent = document.createElement('div')
+            watchContent.innerHTML = `<i class="fa-regular fa-eye" onclick="watchCSV('${element}')"></i>`
+            watch.appendChild(watchContent)
             
             let download = document.createElement('div')
             download.className = 'download'
             let referencia = document.createElement('a')
             referencia.download = element
-            referencia.href = `http://localhost:3000/uploads/${element}`
+            referencia.href = `http://192.168.100.44:3000/uploads/${element}`
             let button = `
             <button>
                 <p>Descargar</p>
@@ -46,6 +52,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             download.appendChild(referencia)
 
             link.appendChild(nameFile)
+            link.appendChild(watch)
             link.appendChild(download)
             
             container.appendChild(link)
