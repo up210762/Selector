@@ -16,4 +16,4 @@
 3.1. Expotar dependencias: {
     - Ejecuta el comando: "pip freeze > requirements.txt".
 }
-4. Iniciar el servidor con el siguiente comando: "pyhton selector.py".
+4. Iniciar el servidor con el siguiente comando: "pyhton setup.py".
