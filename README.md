@@ -15,7 +15,7 @@
 2. Instalar el entorno virtual con el siguiente comando: "python -m virtualenv venv".
 3. Instalar las dependencias: {
     - Ejecuta el comando: "pip install -r requirements.txt".
-}
+}r
 3.1. Expotar dependencias: {
     - Ejecuta el comando: "pip freeze > requirements.txt".
 }
