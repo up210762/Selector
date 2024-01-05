@@ -1,5 +1,5 @@
-const handleFormSubmission = (event) => {
-    event.preventDefault();
+const handleFormSubmission = (e) => {
+    e.preventDefault()
 
     const fileInput = document.querySelector('input[type=file]')
     const newFile = document.getElementById('txt-new-name')
@@ -18,7 +18,7 @@ const handleFormSubmission = (event) => {
         alertContent.appendChild(errorMessage) 
         return
     }
-
+    
     if (!newFile.value || !groupsToCreate.value || !quantityByGroup.value) {
         alertContent.className = 'error'
         errorMessage.id = 'alert-text'
@@ -41,7 +41,7 @@ const handleFormSubmission = (event) => {
     }
 
     alertContent.className = ''
-
+    
     const formData = new FormData()
     formData.append('file', fileInput.files[0])
     formData.append('txt-new-name', newFile.value)

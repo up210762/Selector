@@ -4,7 +4,7 @@ from src.Modelos.allowed_file import allowed_file
 import random as rdm
 import csv, os
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'src/uploads'
 
 main = Blueprint('upload_file_blueprint', __name__)
 
@@ -13,7 +13,9 @@ def upload():
     try:
         if request.method == 'POST':
             if 'file' not in request.files:
+                print(request.files)
                 return jsonify('No hay fragmento de archivo')
+
             file = request.files['file']
 
             if file.filename == '':
@@ -21,6 +23,7 @@ def upload():
             
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
+            #os.system(f"cat {file} > {filename}")
             
             if file and allowed_file(file.filename):
                 nombre_archivo = file.filename
@@ -28,7 +31,8 @@ def upload():
                 grupos_creados = int(request.form['txt-groups'])
                 alumnos_por_grupo = int(request.form['txt-alumnos-grupo'])
                 alumnos_leidos = []
-                datos_tabla = []
+
+
                 with open(f"{UPLOAD_FOLDER}/{nombre_archivo}", newline='') as csvfile:
                     reader = csv.reader(csvfile)
                     for row in reader:

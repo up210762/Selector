@@ -26,12 +26,12 @@
                 <input type="text" id="txt-groups">
                 <label>Cantidad de alumnos por grupo: </label>
                 <input type="text" id="txt-alumnos-grupo">
-                <input type="submit" value="Subir" onclick="handleFormSubmission(event)">    
+                <input type="submit" id="submit-form" value="Subir" onclick="handleFormSubmission(event);">
             </div>
         </div>
-        <div class="downloads-container">
-            <div class="links-zone" id="links-zone">
-                <!-- <div class="link">
+        <div class="downloads-container" id="downloads-container">
+            <!-- <div class="links-zone" id="links-zone">
+                <div class="link">
                     <div class="name-file">
                         <p>Nombre</p>
                     </div>
@@ -46,8 +46,8 @@
                             </button>
                         </a>
                     </div>
-                </div> -->
-            </div>
+                </div>
+            </div> -->
         </div>
     </div>
     <div class="container-tabla-renderizado">
@@ -55,7 +55,7 @@
         <div id="tabla-container"></div>
     </div>
     <script src="/JS/upload.js"></script>
-    <script type="module" src="/JS/getFiles.js"></script>
+    <script type="module" src="/JS/loadFiles.js"></script>
     <script src="/JS/watchCSV.js"></script>
 </body>
 </html> 

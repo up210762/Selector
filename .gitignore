@@ -2,5 +2,5 @@
 *.csv
 #Carpeta venv
 venv/
-# Archivos pycache
+# Directorio pycache
 __pycache__/

@@ -5,6 +5,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 CORS(app, resources={
+    r"/upload/*":{"origins": "*"},
     r"/upload":{"origins": "*"},
     r"/getfiles":{"origins": "*"},
     r"/uploads/*":{"origins": "*"},

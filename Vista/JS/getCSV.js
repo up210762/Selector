@@ -1,4 +1,6 @@
 import { downloadFile } from "./downloadFile.js"
+
+
 export function getCSV(id, archivo){
     document.getElementById(id).addEventListener('click', ()=>{
         fetch(`http://192.168.100.44:3000/uploads/${archivo}`, {
