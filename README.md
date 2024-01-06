@@ -1,7 +1,5 @@
 # Selector
 
-⚠️ **Importante:** Agregar una carpeta llamada "uploads" en las rutas "Vista/" y "Controlador/src/"
-
 · Para usar el programa se debe instalar el ejecutor de archivos "serve" desde la consola de node.
 
 - Pasos para instalar "serve"
